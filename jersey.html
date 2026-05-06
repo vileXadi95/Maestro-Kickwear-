@@ -1,0 +1,1847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maestro Kickwear — Player Version Jerseys</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Antonio:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0d0d0d;
+  --cream: #f4f0e8;
+  --gold: #c9a84c;
+  --gold-lt: #e8d49a;
+  --grass: #1a5c2a;
+  --pitch: #0f3d1a;
+  --red: #c0392b;
+  --white: #ffffff;
+  --gray: #888;
+  --surface: #161616;
+  --surface2: #1f1f1f;
+  --border: rgba(255,255,255,0.07);
+  --f-display: 'Playfair Display', serif;
+  --f-sport: 'Antonio', sans-serif;
+  --f-body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--f-body);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CURSOR ── */
+.cur { width:10px; height:10px; border-radius:50%; background:var(--gold); position:fixed; top:0; left:0; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:width .2s,height .2s,background .2s; }
+.cur.expand { width:44px; height:44px; background:transparent; border:1.5px solid var(--gold); }
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.4rem 5rem;
+  background:rgba(13,13,13,0.9);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.logo {
+  display:flex; flex-direction:column; line-height:1;
+  text-decoration:none;
+}
+.logo-main {
+  font-family:var(--f-display);
+  font-size:1.6rem;
+  font-weight:900;
+  color:var(--cream);
+  letter-spacing:1px;
+}
+.logo-main span { color:var(--gold); }
+.logo-sub {
+  font-family:var(--f-sport);
+  font-size:0.55rem;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-top:2px;
+}
+.nav-links { display:flex; gap:2.5rem; list-style:none; }
+.nav-links a {
+  font-family:var(--f-sport);
+  font-size:0.8rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(244,240,232,0.6);
+  text-decoration:none;
+  transition:color .2s;
+}
+.nav-links a:hover { color:var(--gold); }
+.nav-right { display:flex; align-items:center; gap:1.5rem; }
+.cart-btn {
+  font-family:var(--f-sport);
+  font-size:0.75rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  background:var(--gold);
+  color:var(--ink);
+  padding:.6rem 1.6rem;
+  border:none; cursor:none;
+  font-weight:700;
+  transition:transform .15s, background .2s;
+}
+.cart-btn:hover { background:var(--gold-lt); transform:scale(1.03); }
+.search-icon { color:var(--gray); font-size:1.1rem; cursor:none; transition:color .2s; }
+.search-icon:hover { color:var(--gold); }
+
+/* ── HERO ── */
+.hero {
+  min-height:100vh;
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
+.hero-left {
+  display:flex; flex-direction:column; justify-content:center;
+  padding:9rem 5rem 5rem;
+  position:relative; z-index:2;
+}
+.hero-eyebrow {
+  display:flex; align-items:center; gap:12px;
+  font-family:var(--f-sport);
+  font-size:0.7rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:1.8rem;
+}
+.hero-eyebrow::before { content:''; width:32px; height:1px; background:var(--gold); }
+.hero-h1 {
+  font-family:var(--f-display);
+  font-size:clamp(4rem,7vw,7.5rem);
+  font-weight:900;
+  line-height:.92;
+  letter-spacing:-1px;
+  margin-bottom:1.8rem;
+}
+.hero-h1 em { color:var(--gold); font-style:italic; }
+.hero-h1 .stroke {
+  -webkit-text-stroke:1.5px var(--cream);
+  color:transparent;
+}
+.hero-p {
+  font-size:1rem;
+  color:rgba(244,240,232,0.55);
+  line-height:1.8;
+  max-width:400px;
+  margin-bottom:2.5rem;
+}
+.hero-actions { display:flex; gap:1rem; align-items:center; }
+.btn-gold {
+  font-family:var(--f-sport);
+  font-size:0.8rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  background:var(--gold);
+  color:var(--ink);
+  padding:1rem 2.8rem;
+  border:none; cursor:none; font-weight:700;
+  text-decoration:none;
+  display:inline-block;
+  transition:transform .15s, background .2s;
+}
+.btn-gold:hover { background:var(--gold-lt); transform:translateY(-2px); }
+.btn-outline {
+  font-family:var(--f-sport);
+  font-size:0.8rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--cream);
+  padding:1rem 2.8rem;
+  border:1px solid rgba(244,240,232,0.25);
+  cursor:none; text-decoration:none;
+  display:inline-block;
+  transition:border-color .2s, color .2s;
+}
+.btn-outline:hover { border-color:var(--gold); color:var(--gold); }
+.hero-badge {
+  margin-top:3.5rem;
+  display:flex; gap:2.5rem;
+  padding-top:2rem;
+  border-top:1px solid var(--border);
+}
+.badge-val {
+  font-family:var(--f-sport);
+  font-size:2.2rem;
+  font-weight:700;
+  color:var(--gold);
+}
+.badge-lbl {
+  font-family:var(--f-sport);
+  font-size:0.65rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--gray);
+  margin-top:3px;
+}
+.hero-right {
+  position:relative;
+  background:var(--surface);
+  overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.pitch-pattern {
+  position:absolute; inset:0;
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 28px, rgba(255,255,255,0.018) 28px, rgba(255,255,255,0.018) 30px
+  ),
+  repeating-linear-gradient(
+    90deg, transparent, transparent 28px, rgba(255,255,255,0.018) 28px, rgba(255,255,255,0.018) 30px
+  );
+}
+.hero-jersey-showcase {
+  position:relative; z-index:2;
+  text-align:center;
+}
+.hero-jersey-emoji {
+  font-size:clamp(9rem,16vw,14rem);
+  filter:drop-shadow(0 20px 60px rgba(201,168,76,0.2));
+  display:block;
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-16px); }
+}
+.hero-jersey-tag {
+  margin-top:1.5rem;
+  display:inline-block;
+  font-family:var(--f-sport);
+  font-size:0.7rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  background:var(--gold);
+  color:var(--ink);
+  padding:.4rem 1.2rem;
+}
+.hero-bg-num {
+  position:absolute;
+  font-family:var(--f-sport);
+  font-size:28rem;
+  font-weight:700;
+  color:rgba(201,168,76,0.03);
+  right:-4rem; bottom:-4rem;
+  line-height:1;
+  pointer-events:none; user-select:none;
+}
+
+/* ── TICKER ── */
+.ticker {
+  background:var(--gold);
+  padding:.7rem 0;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.ticker-inner {
+  display:inline-block;
+  animation:tick 25s linear infinite;
+  font-family:var(--f-sport);
+  font-size:.85rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.ticker-inner span { margin:0 2rem; }
+.tick-dot { color:var(--grass); }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── SECTION BASE ── */
+section { padding:6rem 5rem; }
+.s-tag {
+  font-family:var(--f-sport);
+  font-size:.7rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:.8rem;
+}
+.s-title {
+  font-family:var(--f-display);
+  font-size:clamp(2.5rem,5vw,4rem);
+  font-weight:900;
+  line-height:.95;
+  letter-spacing:-.5px;
+}
+.s-title .stroke {
+  -webkit-text-stroke:1.5px var(--cream);
+  color:transparent;
+}
+
+/* ── CATEGORIES ── */
+.cats { background:var(--surface); }
+.cats-head {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:3rem;
+}
+.cat-tabs { display:flex; gap:.5rem; }
+.cat-tab {
+  font-family:var(--f-sport);
+  font-size:.7rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:.45rem 1.2rem;
+  border:1px solid var(--border);
+  color:var(--gray);
+  background:transparent;
+  cursor:none;
+  transition:all .2s;
+}
+.cat-tab.on,.cat-tab:hover { background:var(--gold); color:var(--ink); border-color:var(--gold); }
+.cat-grid {
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:1px;
+  background:var(--border);
+}
+.cat-card {
+  background:var(--surface2);
+  padding:2rem 1.5rem;
+  cursor:none;
+  position:relative;
+  overflow:hidden;
+  transition:background .25s;
+  text-align:center;
+}
+.cat-card:hover { background:#252525; }
+.cat-flag { font-size:2.8rem; margin-bottom:.8rem; display:block; }
+.cat-name {
+  font-family:var(--f-sport);
+  font-size:.85rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.cat-count { font-size:.7rem; color:var(--gray); }
+.cat-line {
+  position:absolute; bottom:0; left:0; right:0; height:2px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .3s;
+}
+.cat-card:hover .cat-line { transform:scaleX(1); }
+
+/* ── JERSEYS GRID ── */
+.jerseys { background:var(--ink); }
+.jerseys-top {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:3rem;
+}
+.filters { display:flex; gap:.5rem; flex-wrap:wrap; }
+.f-btn {
+  font-family:var(--f-sport);
+  font-size:.65rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:.35rem 1rem;
+  border:1px solid var(--border);
+  color:var(--gray);
+  background:transparent;
+  cursor:none;
+  transition:all .2s;
+}
+.f-btn.on,.f-btn:hover { border-color:var(--gold); color:var(--gold); }
+.jersey-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border);
+}
+.j-card {
+  background:var(--ink);
+  cursor:none;
+  position:relative;
+  overflow:hidden;
+  transition:background .2s;
+}
+.j-card:hover { background:var(--surface); }
+.j-img {
+  aspect-ratio:1;
+  display:flex; align-items:center; justify-content:center;
+  font-size:5.5rem;
+  position:relative;
+  overflow:hidden;
+}
+.j-img-bg {
+  position:absolute; inset:0;
+  opacity:.06;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:center;
+  transition:opacity .3s;
+}
+.j-card:hover .j-img-bg { opacity:.12; }
+.j-badge {
+  position:absolute; top:12px; left:12px;
+  font-family:var(--f-sport);
+  font-size:.6rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:3px 8px;
+  z-index:2;
+}
+.j-badge.player { background:var(--gold); color:var(--ink); }
+.j-badge.new { background:var(--grass); color:#fff; }
+.j-badge.ltd { background:var(--red); color:#fff; }
+.j-wishlist {
+  position:absolute; top:12px; right:12px;
+  width:30px; height:30px;
+  border:1px solid var(--border);
+  background:rgba(13,13,13,.7);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.9rem;
+  opacity:0; transition:opacity .2s;
+  cursor:none;
+  z-index:2;
+}
+.j-card:hover .j-wishlist { opacity:1; }
+.j-info { padding:1.2rem 1.4rem 1.4rem; border-top:1px solid var(--border); }
+.j-club {
+  font-family:var(--f-sport);
+  font-size:.6rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:4px;
+}
+.j-name {
+  font-family:var(--f-sport);
+  font-size:1rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+  line-height:1.2;
+}
+.j-meta {
+  display:flex; gap:8px;
+  margin-bottom:1rem;
+}
+.j-tag {
+  font-size:.6rem;
+  font-family:var(--f-sport);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  padding:2px 6px;
+  border:1px solid var(--border);
+  color:var(--gray);
+}
+.j-footer { display:flex; justify-content:space-between; align-items:center; }
+.j-price {
+  font-family:var(--f-sport);
+  font-size:1.4rem;
+  font-weight:700;
+  color:var(--gold);
+}
+.j-price-old {
+  font-size:.75rem;
+  color:var(--gray);
+  text-decoration:line-through;
+  margin-left:6px;
+}
+.j-add {
+  font-family:var(--f-sport);
+  font-size:.65rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:.45rem 1rem;
+  border:1px solid var(--border);
+  color:var(--cream);
+  background:transparent;
+  cursor:none;
+  transition:all .2s;
+}
+.j-add:hover { background:var(--gold); color:var(--ink); border-color:var(--gold); }
+
+/* ── FEATURE STRIP ── */
+.features {
+  background:var(--surface);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  padding:0;
+}
+.feat {
+  padding:3rem 2.5rem;
+  border-right:1px solid var(--border);
+  transition:background .2s;
+}
+.feat:last-child { border-right:none; }
+.feat:hover { background:var(--surface2); }
+.feat-icon { font-size:2rem; margin-bottom:1rem; }
+.feat-title {
+  font-family:var(--f-sport);
+  font-size:.9rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:.5rem;
+  color:var(--cream);
+}
+.feat-desc { font-size:.85rem; color:var(--gray); line-height:1.6; }
+
+/* ── CLUBS SHOWCASE ── */
+.clubs { background:var(--pitch); position:relative; overflow:hidden; }
+.clubs::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(26,92,42,0.5) 0%, transparent 70%);
+}
+.clubs-inner { position:relative; z-index:2; }
+.clubs-head { text-align:center; margin-bottom:3.5rem; }
+.clubs-head .s-title { color:var(--cream); }
+.clubs-scroll {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1px;
+  background:rgba(255,255,255,0.05);
+}
+.club-tile {
+  background:rgba(255,255,255,0.03);
+  padding:2rem 1.5rem;
+  text-align:center;
+  cursor:none;
+  transition:background .2s;
+  position:relative;
+}
+.club-tile:hover { background:rgba(201,168,76,0.12); }
+.club-emoji { font-size:3.5rem; margin-bottom:.8rem; display:block; }
+.club-name {
+  font-family:var(--f-sport);
+  font-size:.8rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--cream);
+  margin-bottom:3px;
+}
+.club-league { font-size:.65rem; color:rgba(244,240,232,0.4); font-family:var(--f-sport); letter-spacing:1px; text-transform:uppercase; }
+.club-jerseys {
+  margin-top:.7rem;
+  font-family:var(--f-sport);
+  font-size:.65rem;
+  letter-spacing:2px;
+  color:var(--gold);
+  text-transform:uppercase;
+}
+
+/* ── COUNTRY SECTION ── */
+.countries { background:var(--ink); }
+.cntry-grid {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1.5rem;
+  margin-top:3rem;
+}
+.cntry-card {
+  border:1px solid var(--border);
+  padding:2rem 1.5rem;
+  text-align:center;
+  cursor:none;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .25s, background .25s;
+}
+.cntry-card:hover { border-color:var(--gold); background:rgba(201,168,76,0.04); }
+.cntry-flag { font-size:3.5rem; display:block; margin-bottom:.8rem; }
+.cntry-name {
+  font-family:var(--f-sport);
+  font-size:.9rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.cntry-kits {
+  font-size:.7rem;
+  color:var(--gray);
+  font-family:var(--f-sport);
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.cntry-price-from {
+  margin-top:.8rem;
+  font-family:var(--f-sport);
+  font-size:.75rem;
+  color:var(--gold);
+  letter-spacing:1px;
+}
+
+/* ── WHY PLAYER VERSION ── */
+.pvt { background:var(--surface); }
+.pvt-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem;
+  align-items:center;
+  margin-top:3rem;
+}
+.pvt-visual {
+  position:relative;
+}
+.pvt-big-jersey {
+  font-size:16rem;
+  display:block;
+  text-align:center;
+  filter:drop-shadow(0 0 60px rgba(201,168,76,0.15));
+}
+.pvt-label {
+  position:absolute;
+  background:var(--gold);
+  color:var(--ink);
+  font-family:var(--f-sport);
+  font-size:.65rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:.4rem .8rem;
+}
+.pvt-label.l1 { top:20%; left:5%; }
+.pvt-label.l2 { top:50%; right:5%; }
+.pvt-label.l3 { bottom:20%; left:15%; }
+.pvt-points { display:flex; flex-direction:column; gap:1.5rem; margin-top:2rem; }
+.pvt-point {
+  display:flex; gap:1.2rem; align-items:flex-start;
+  padding-bottom:1.5rem;
+  border-bottom:1px solid var(--border);
+}
+.pvt-point:last-child { border-bottom:none; }
+.pvt-num {
+  font-family:var(--f-display);
+  font-size:2.5rem;
+  font-weight:900;
+  color:var(--gold);
+  opacity:.35;
+  line-height:1;
+  flex-shrink:0;
+  width:3rem;
+}
+.pvt-pt-title {
+  font-family:var(--f-sport);
+  font-size:.9rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:.3rem;
+}
+.pvt-pt-desc { font-size:.85rem; color:var(--gray); line-height:1.6; }
+
+/* ── TESTIMONIALS ── */
+.testis { background:var(--ink); }
+.testis-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:var(--border);
+  margin-top:3rem;
+}
+.tcard {
+  background:var(--ink);
+  padding:2.5rem;
+  transition:background .2s;
+}
+.tcard:hover { background:var(--surface); }
+.tcard-stars { color:var(--gold); font-size:.85rem; letter-spacing:4px; margin-bottom:1rem; }
+.tcard-q {
+  font-family:var(--f-display);
+  font-size:1rem;
+  font-weight:700;
+  font-style:italic;
+  line-height:1.7;
+  color:rgba(244,240,232,.75);
+  margin-bottom:1.5rem;
+}
+.tcard-auth { display:flex; align-items:center; gap:12px; }
+.tcard-av {
+  width:40px; height:40px; border-radius:50%;
+  border:1.5px solid var(--gold);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem;
+  background:var(--surface2);
+}
+.tcard-name {
+  font-family:var(--f-sport);
+  font-size:.8rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.tcard-club { font-size:.72rem; color:var(--gray); }
+
+/* ── SIZE / CUSTOMIZE CTA ── */
+.custom-banner {
+  background:var(--surface);
+  padding:5rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem;
+  align-items:center;
+  border-top:1px solid var(--border);
+}
+.cb-title {
+  font-family:var(--f-display);
+  font-size:clamp(2.5rem,5vw,4rem);
+  font-weight:900;
+  line-height:.95;
+  letter-spacing:-.5px;
+  margin-bottom:1rem;
+}
+.cb-title span { color:var(--gold); font-style:italic; }
+.cb-desc { font-size:1rem; color:var(--gray); line-height:1.8; margin-bottom:2rem; }
+.size-pills { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:2rem; }
+.s-pill {
+  font-family:var(--f-sport);
+  font-size:.75rem;
+  letter-spacing:1px;
+  padding:.5rem 1rem;
+  border:1px solid var(--border);
+  color:var(--gray);
+  cursor:none;
+  transition:all .2s;
+}
+.s-pill:hover,.s-pill.sel { border-color:var(--gold); color:var(--gold); background:rgba(201,168,76,0.08); }
+.cb-right { text-align:center; }
+.cb-jersey-em { font-size:10rem; display:block; animation:float 4s ease-in-out infinite; filter:drop-shadow(0 0 40px rgba(201,168,76,0.2)); }
+.cb-tag {
+  margin-top:1rem;
+  font-family:var(--f-sport);
+  font-size:.7rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+
+/* ── FOOTER ── */
+footer {
+  background:#080808;
+  padding:5rem 5rem 2.5rem;
+  border-top:1px solid var(--border);
+}
+.ft-grid {
+  display:grid;
+  grid-template-columns:2.5fr 1fr 1fr 1fr;
+  gap:3rem;
+  margin-bottom:4rem;
+}
+.ft-brand .logo-main { font-size:1.8rem; }
+.ft-brand .logo-sub { font-size:.5rem; }
+.ft-brand p {
+  font-size:.85rem;
+  color:var(--gray);
+  line-height:1.8;
+  margin-top:1rem;
+  max-width:280px;
+}
+.ft-col h4 {
+  font-family:var(--f-sport);
+  font-size:.65rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:1.3rem;
+}
+.ft-col ul { list-style:none; }
+.ft-col li { margin-bottom:.6rem; }
+.ft-col a {
+  font-size:.85rem;
+  color:var(--gray);
+  text-decoration:none;
+  transition:color .2s;
+}
+.ft-col a:hover { color:var(--cream); }
+.ft-bottom {
+  border-top:1px solid var(--border);
+  padding-top:2rem;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.ft-copy { font-size:.72rem; color:var(--gray); letter-spacing:1px; }
+.ft-social { display:flex; gap:.8rem; }
+.soc {
+  width:34px; height:34px;
+  border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--gray);
+  text-decoration:none;
+  font-family:var(--f-sport);
+  font-size:.7rem;
+  font-weight:700;
+  transition:all .2s;
+  cursor:none;
+}
+.soc:hover { border-color:var(--gold); color:var(--gold); }
+
+/* ── REVEAL ── */
+.rev { opacity:0; transform:translateY(28px); transition:opacity .65s ease, transform .65s ease; }
+.rev.in { opacity:1; transform:translateY(0); }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.85);
+  z-index:500;
+  display:none; align-items:center; justify-content:center;
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:2.5rem;
+  max-width:420px; width:90%;
+  position:relative;
+}
+.modal-close {
+  position:absolute; top:1rem; right:1rem;
+  background:transparent; border:none;
+  color:var(--gray); font-size:1.2rem; cursor:none;
+}
+.modal-jersey { font-size:6rem; text-align:center; display:block; margin-bottom:1rem; }
+.modal-club { font-family:var(--f-sport); font-size:.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:.3rem; }
+.modal-name { font-family:var(--f-sport); font-size:1.4rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:1rem; }
+.modal-price { font-family:var(--f-sport); font-size:2rem; color:var(--gold); margin-bottom:1.5rem; }
+.modal-sizes { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+.ms { font-family:var(--f-sport); font-size:.7rem; padding:.4rem .9rem; border:1px solid var(--border); color:var(--gray); cursor:none; transition:all .2s; }
+.ms:hover,.ms.sel { border-color:var(--gold); color:var(--gold); }
+.modal-btn { width:100%; padding:1rem; background:var(--gold); color:var(--ink); font-family:var(--f-sport); font-size:.85rem; letter-spacing:3px; text-transform:uppercase; font-weight:700; border:none; cursor:none; transition:background .2s; }
+.modal-btn:hover { background:var(--gold-lt); }
+
+@media(max-width:900px){
+  nav { padding:1rem 1.5rem; }
+  .nav-links { display:none; }
+  .hero { grid-template-columns:1fr; }
+  .hero-right { display:none; }
+  .hero-left { padding:7rem 1.5rem 3rem; }
+  section { padding:4rem 1.5rem; }
+  .cat-grid { grid-template-columns:repeat(3,1fr); }
+  .jersey-grid { grid-template-columns:repeat(2,1fr); }
+  .features { grid-template-columns:1fr 1fr; }
+  .clubs-scroll { grid-template-columns:repeat(3,1fr); }
+  .cntry-grid { grid-template-columns:repeat(3,1fr); }
+  .pvt-grid { grid-template-columns:1fr; }
+  .testis-grid { grid-template-columns:1fr; }
+  .custom-banner { grid-template-columns:1fr; padding:3rem 1.5rem; }
+  .ft-grid { grid-template-columns:1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <span class="modal-jersey" id="m-emoji">👕</span>
+    <div class="modal-club" id="m-club">Club</div>
+    <div class="modal-name" id="m-name">Jersey Name</div>
+    <div class="modal-price" id="m-price">₹799</div>
+    <div style="font-family:var(--f-sport);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:.7rem;">Select Size</div>
+    <div class="modal-sizes">
+      <span class="ms" onclick="selSize(this)">XS</span>
+      <span class="ms" onclick="selSize(this)">S</span>
+      <span class="ms sel" onclick="selSize(this)">M</span>
+      <span class="ms" onclick="selSize(this)">L</span>
+      <span class="ms" onclick="selSize(this)">XL</span>
+      <span class="ms" onclick="selSize(this)">XXL</span>
+    </div>
+    <button class="modal-btn" onclick="addToCart()">Add to Cart — Player Version</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <span class="logo-main">Maestro<span> Kickwear</span></span>
+    <span class="logo-sub">Player Version Jerseys</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#cats">Categories</a></li>
+    <li><a href="#jerseys">Shop</a></li>
+    <li><a href="#clubs">Clubs</a></li>
+    <li><a href="#countries">Countries</a></li>
+    <li><a href="#why">Player Version</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="search-icon">⌕</span>
+    <button class="cart-btn" id="cartbtn" onclick="navigateTo('cart')">🛒 Cart (0)</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" style="padding:0;">
+  <div class="hero-left">
+    <div class="hero-eyebrow">2025/26 Season Collection</div>
+    <h1 class="hero-h1">
+      WEAR WHAT<br>
+      THE <em>PROS</em><br>
+      <span class="stroke">WEAR</span>
+    </h1>
+    <p class="hero-p">Authentic player version jerseys from the world's biggest clubs and national teams. Same fabric. Same fit. Same feel. Starting at ₹350.</p>
+    <div class="hero-actions">
+      <a href="#jerseys" class="btn-gold">Shop Jerseys</a>
+      <a href="#why" class="btn-outline">Why Player Version?</a>
+    </div>
+    <div class="hero-badge">
+      <div>
+        <div class="badge-val">120+</div>
+        <div class="badge-lbl">Clubs & Nations</div>
+      </div>
+      <div>
+        <div class="badge-val">₹350</div>
+        <div class="badge-lbl">Starting Price</div>
+      </div>
+      <div>
+        <div class="badge-val">48hr</div>
+        <div class="badge-lbl">Fast Delivery</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="pitch-pattern"></div>
+    <div class="hero-bg-num">11</div>
+    <div class="hero-jersey-showcase">
+      <span class="hero-jersey-emoji">👕</span>
+      <span class="hero-jersey-tag">Player Version · Authentic Fit</span>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>MAESTRO KICKWEAR</span><span class="tick-dot"> ✦ </span>
+    <span>PLAYER VERSION JERSEYS</span><span class="tick-dot"> ✦ </span>
+    <span>CLUBS &amp; NATIONAL TEAMS</span><span class="tick-dot"> ✦ </span>
+    <span>FROM ₹350 TO ₹1200</span><span class="tick-dot"> ✦ </span>
+    <span>48 HOUR DELIVERY</span><span class="tick-dot"> ✦ </span>
+    <span>FREE SHIPPING ABOVE ₹999</span><span class="tick-dot"> ✦ </span>
+    <span>MAESTRO KICKWEAR</span><span class="tick-dot"> ✦ </span>
+    <span>PLAYER VERSION JERSEYS</span><span class="tick-dot"> ✦ </span>
+    <span>CLUBS &amp; NATIONAL TEAMS</span><span class="tick-dot"> ✦ </span>
+    <span>FROM ₹350 TO ₹1200</span><span class="tick-dot"> ✦ </span>
+    <span>48 HOUR DELIVERY</span><span class="tick-dot"> ✦ </span>
+    <span>FREE SHIPPING ABOVE ₹999</span><span class="tick-dot"> ✦ </span>
+  </div>
+</div>
+
+<!-- CATS -->
+<section class="cats" id="cats">
+  <div class="cats-head rev">
+    <div>
+      <div class="s-tag">Browse by League</div>
+      <h2 class="s-title">CHOOSE YOUR <span class="stroke">LEAGUE</span></h2>
+    </div>
+    <div class="cat-tabs">
+      <button class="cat-tab on">All</button>
+      <button class="cat-tab">Clubs</button>
+      <button class="cat-tab">National</button>
+    </div>
+  </div>
+  <div class="cat-grid rev">
+    <div class="cat-card"><span class="cat-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><div class="cat-name">Premier League</div><div class="cat-count">18 clubs · 54 jerseys</div><div class="cat-line"></div></div>
+    <div class="cat-card"><span class="cat-flag">🇪🇸</span><div class="cat-name">La Liga</div><div class="cat-count">12 clubs · 36 jerseys</div><div class="cat-line"></div></div>
+    <div class="cat-card"><span class="cat-flag">🇩🇪</span><div class="cat-name">Bundesliga</div><div class="cat-count">10 clubs · 30 jerseys</div><div class="cat-line"></div></div>
+    <div class="cat-card"><span class="cat-flag">🇮🇹</span><div class="cat-name">Serie A</div><div class="cat-count">8 clubs · 24 jerseys</div><div class="cat-line"></div></div>
+    <div class="cat-card"><span class="cat-flag">🇫🇷</span><div class="cat-name">Ligue 1</div><div class="cat-count">6 clubs · 18 jerseys</div><div class="cat-line"></div></div>
+    <div class="cat-card"><span class="cat-flag">🌍</span><div class="cat-name">International</div><div class="cat-count">40 nations · 120 kits</div><div class="cat-line"></div></div>
+  </div>
+</section>
+
+<!-- JERSEYS -->
+<section class="jerseys" id="jerseys">
+  <div class="jerseys-top rev">
+    <div>
+      <div class="s-tag">2025/26 Collection</div>
+      <h2 class="s-title">FEATURED <span class="stroke">JERSEYS</span></h2>
+    </div>
+    <div class="filters">
+      <button class="f-btn on">All</button>
+      <button class="f-btn">Home</button>
+      <button class="f-btn">Away</button>
+      <button class="f-btn">Third</button>
+      <button class="f-btn">Special Ed.</button>
+    </div>
+  </div>
+  <div class="jersey-grid rev" id="jersey-grid">
+
+    <div class="j-card" onclick="openModal('⚽','Real Madrid','Real Madrid Home Kit 25/26','₹1,199','₹1,299')">
+      <div class="j-img" style="background:#1a1a2e;">
+        <div class="j-img-bg" style="background:linear-gradient(135deg,#fff,#eee);"></div>
+        <span class="j-badge player">Player Version</span>
+        <span class="j-badge new" style="top:12px;left:auto;right:44px;">New</span>
+        <div class="j-wishlist">♡</div>
+        👕
+      </div>
+      <div class="j-info">
+        <div class="j-club">Real Madrid · La Liga</div>
+        <div class="j-name">Home Kit 25/26</div>
+        <div class="j-meta"><span class="j-tag">Home</span><span class="j-tag">Dri-FIT ADV</span></div>
+        <div class="j-footer">
+          <div><span class="j-price">₹1,199</span><span class="j-price-old">₹1,299</span></div>
+          <button class="j-add">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="j-card" onclick="openModal('🔵','Manchester City','Man City Away Kit 25/26','₹999','₹1,199')">
+      <div class="j-img" style="background:#0d1b2a;">
+        <div class="j-img-bg" style="background:linear-gradient(135deg,#6caddf,#1c6fb5);"></div>
+        <span class="j-badge player">Player Version</span>
+        <div class="j-wishlist">♡</div>
+        👕
+      </div>
+      <div class="j-info">
+        <div class="j-club">Manchester City · Premier League</div>
+        <div class="j-name">Away Kit 25/26</div>
+        <div class="j-meta"><span class="j-tag">Away</span><span class="j-tag">Vaporknit</span></div>
+        <div class="j-footer">
+          <div><span class="j-price">₹999</span><span class="j-price-old">₹1,199</span></div>
+          <button class="j-add">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="j-card" onclick="openModal('🔴','FC Barcelona','Barça Home Kit 25/26','₹1,099','₹1,199')">
+      <div class="j-img" style="background:#0a0a18;">
+        <div class="j-img-bg" style="background:linear-gradient(135deg,#a50044,#004d98);"></div>
+        <span class="j-badge player">Player Version</span>
+        <span class="j-badge ltd" style="top:12px;left:auto;right:44px;">Limited</span>
+        <div class="j-wishlist">♡</div>
+        👕
+      </div>
+      <div class="j-info">
+        <div class="j-club">FC Barcelona · La Liga</div>
+        <div class="j-name">Home Kit 25/26</div>
+        <div class="j-meta"><span class="j-tag">Home</span><span class="j-tag">Dri-FIT ADV</span></div>
+        <div class="j-footer">
+          <div><span class="j-price">₹1,099</span><span class="j-price-old">₹1,199</span></div>
+          <button class="j-add">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="j-card" onclick="openModal('🏆','Brazil NT','Brazil Home Kit 25/26','₹899','')">
+      <div class="j-img" style="background:#1a1400;">
+        <div class="j-img-bg" style="background:linear-gradient(135deg,#f9dd16,#009c3b);"></div>
+        <span class="j-badge player">Player Version</span>
+        <span class="j-badge new" style="top:12px;left:auto;right:44px;">New</span>
+        <div class="j-wishlist">♡</div>
+        👕
+      </div>
+      <div class="j-info">
+        <div class="j-club">Brazil · International</div>
+        <div class="j-name">Home Kit 25/26</div>
+        <div class="j-meta"><span class="j-tag">Home</span><span class="j-tag">Vapor</span></div>
+        <div class="j-footer">
+          <div><span class="j-price">₹899</span></div>
+          <button class="j-add">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="j-card" onclick="openModal('⚫','Juventus','Juventus Home Kit 25/26','₹849','₹999')">
+      <div class="j-img" style="background:#111;">
+        <div class="j-img-bg" style="background:linear-gradient(135deg,#fff,#111);"></div>
+        <span class="j-badge player">Player Version</span>
+        <div class="j-wishlist">♡</div>
+        👕
+      </div>
+      <div class="j-info">
+        <div class="j-club">Juventus · Serie A</div>
+        <div class="j-name">Home Kit 25/26</div>
+        <div class="j-meta"><span class="j-tag">Home</span><span class="j-tag">Heat.RDY</span></div>
+        <div class="j-footer">
+          <div><span class="j-price">₹849</span><span class="j-price-old">₹999</span></div>
+          <button class="j-add">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="j-card" onclick="openModal('🇩🇪','Germany NT','Germany Away Kit 25/26','₹799','')">
+      <div class="j-img" style="background:#0d0d1a;">
+        <div class="j-img-bg" style="background:linear-gradient(135deg,#3a3a3a,#111);"></div>
+        <span class="j-badge player">Player Version</span>
+        <div class="j-wishlist">♡</div>
+        👕
+      </div>
+      <div class="j-info">
+        <div class="j-club">Germany · International</div>
+        <div class="j-name">Away Kit 25/26</div>
+        <div class="j-meta"><span class="j-tag">Away</span><span class="j-tag">Climachill</span></div>
+        <div class="j-footer">
+          <div><span class="j-price">₹799</span></div>
+          <button class="j-add">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="j-card" onclick="openModal('🔴','Liverpool FC','Liverpool Third Kit 25/26','₹949','₹1,099')">
+      <div class="j-img" style="background:#160000;">
+        <div class="j-img-bg" style="background:linear-gradient(135deg,#c8102e,#900);"></div>
+        <span class="j-badge player">Player Version</span>
+        <span class="j-badge ltd" style="top:12px;left:auto;right:44px;">Limited</span>
+        <div class="j-wishlist">♡</div>
+        👕
+      </div>
+      <div class="j-info">
+        <div class="j-club">Liverpool FC · Premier League</div>
+        <div class="j-name">Third Kit 25/26</div>
+        <div class="j-meta"><span class="j-tag">Third</span><span class="j-tag">Dri-FIT</span></div>
+        <div class="j-footer">
+          <div><span class="j-price">₹949</span><span class="j-price-old">₹1,099</span></div>
+          <button class="j-add">Add +</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="j-card" onclick="openModal('🇫🇷','France NT','France Home Kit 25/26','₹349','')">
+      <div class="j-img" style="background:#000d1a;">
+        <div class="j-img-bg" style="background:linear-gradient(135deg,#002395,#ed2939);"></div>
+        <span class="j-badge player">Player Version</span>
+        <span class="j-badge new" style="top:12px;left:auto;right:44px;">New</span>
+        <div class="j-wishlist">♡</div>
+        👕
+      </div>
+      <div class="j-info">
+        <div class="j-club">France · International</div>
+        <div class="j-name">Home Kit 25/26</div>
+        <div class="j-meta"><span class="j-tag">Home</span><span class="j-tag">Vapor</span></div>
+        <div class="j-footer">
+          <div><span class="j-price">₹349</span></div>
+          <button class="j-add">Add +</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align:center; margin-top:3rem;">
+    <a href="#" class="btn-outline">Load More Jerseys →</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="features">
+  <div class="feat rev">
+    <div class="feat-icon">🧵</div>
+    <div class="feat-title">Authentic Fabric</div>
+    <div class="feat-desc">Same VaporKnit / Dri-FIT ADV fabric used by the actual players on match day.</div>
+  </div>
+  <div class="feat rev">
+    <div class="feat-icon">✂️</div>
+    <div class="feat-title">Player Fit Cut</div>
+    <div class="feat-desc">Slim athletic cut engineered for performance — not the baggy fan replica version.</div>
+  </div>
+  <div class="feat rev">
+    <div class="feat-icon">🚚</div>
+    <div class="feat-title">48hr Delivery</div>
+    <div class="feat-desc">Pan-India express delivery. Free shipping on all orders above ₹999.</div>
+  </div>
+  <div class="feat rev">
+    <div class="feat-icon">↩️</div>
+    <div class="feat-title">Easy Returns</div>
+    <div class="feat-desc">7-day hassle-free returns. Wrong size? We'll swap it, no questions asked.</div>
+  </div>
+</div>
+
+<!-- CLUBS -->
+<section class="clubs" id="clubs">
+  <div class="clubs-inner">
+    <div class="clubs-head rev">
+      <div class="s-tag" style="justify-content:center;display:flex;">Top Clubs</div>
+      <h2 class="s-title" style="text-align:center;">SHOP BY <span class="stroke">CLUB</span></h2>
+    </div>
+    <div class="clubs-scroll rev">
+      <div class="club-tile"><span class="club-emoji">⚽</span><div class="club-name">Real Madrid</div><div class="club-league">La Liga</div><div class="club-jerseys">3 kits available</div></div>
+      <div class="club-tile"><span class="club-emoji">🔴</span><div class="club-name">Manchester Utd</div><div class="club-league">Premier League</div><div class="club-jerseys">3 kits available</div></div>
+      <div class="club-tile"><span class="club-emoji">🔵</span><div class="club-name">Chelsea FC</div><div class="club-league">Premier League</div><div class="club-jerseys">3 kits available</div></div>
+      <div class="club-tile"><span class="club-emoji">🟡</span><div class="club-name">Borussia Dortmund</div><div class="club-league">Bundesliga</div><div class="club-jerseys">2 kits available</div></div>
+      <div class="club-tile"><span class="club-emoji">⚫</span><div class="club-name">AC Milan</div><div class="club-league">Serie A</div><div class="club-jerseys">3 kits available</div></div>
+      <div class="club-tile"><span class="club-emoji">🔵</span><div class="club-name">PSG</div><div class="club-league">Ligue 1</div><div class="club-jerseys">3 kits available</div></div>
+      <div class="club-tile"><span class="club-emoji">🔵</span><div class="club-name">Man City</div><div class="club-league">Premier League</div><div class="club-jerseys">3 kits available</div></div>
+      <div class="club-tile"><span class="club-emoji">🔴</span><div class="club-name">Bayern Munich</div><div class="club-league">Bundesliga</div><div class="club-jerseys">3 kits available</div></div>
+      <div class="club-tile"><span class="club-emoji">🔵</span><div class="club-name">Inter Milan</div><div class="club-league">Serie A</div><div class="club-jerseys">2 kits available</div></div>
+      <div class="club-tile"><span class="club-emoji">🔴</span><div class="club-name">Liverpool FC</div><div class="club-league">Premier League</div><div class="club-jerseys">3 kits available</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTRIES -->
+<section class="countries" id="countries">
+  <div class="rev">
+    <div class="s-tag">National Teams</div>
+    <h2 class="s-title">INTERNATIONAL <span class="stroke">KITS</span></h2>
+  </div>
+  <div class="cntry-grid rev">
+    <div class="cntry-card" onclick="openModal('🇧🇷','Brazil NT','Brazil Home Kit','₹899','')"><span class="cntry-flag">🇧🇷</span><div class="cntry-name">Brazil</div><div class="cntry-kits">Home · Away · Third</div><div class="cntry-price-from">From ₹649</div></div>
+    <div class="cntry-card" onclick="openModal('🇫🇷','France NT','France Home Kit','₹349','')"><span class="cntry-flag">🇫🇷</span><div class="cntry-name">France</div><div class="cntry-kits">Home · Away · Third</div><div class="cntry-price-from">From ₹349</div></div>
+    <div class="cntry-card" onclick="openModal('🇦🇷','Argentina NT','Argentina Home Kit','₹799','')"><span class="cntry-flag">🇦🇷</span><div class="cntry-name">Argentina</div><div class="cntry-kits">Home · Away</div><div class="cntry-price-from">From ₹699</div></div>
+    <div class="cntry-card" onclick="openModal('🇩🇪','Germany NT','Germany Home Kit','₹799','')"><span class="cntry-flag">🇩🇪</span><div class="cntry-name">Germany</div><div class="cntry-kits">Home · Away · Third</div><div class="cntry-price-from">From ₹599</div></div>
+    <div class="cntry-card" onclick="openModal('🏴󠁧󠁢󠁥󠁮󠁧󠁿','England NT','England Home Kit','₹849','')"><span class="cntry-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><div class="cntry-name">England</div><div class="cntry-kits">Home · Away</div><div class="cntry-price-from">From ₹649</div></div>
+    <div class="cntry-card" onclick="openModal('🇪🇸','Spain NT','Spain Home Kit','₹799','')"><span class="cntry-flag">🇪🇸</span><div class="cntry-name">Spain</div><div class="cntry-kits">Home · Away · Third</div><div class="cntry-price-from">From ₹599</div></div>
+    <div class="cntry-card" onclick="openModal('🇵🇹','Portugal NT','Portugal Home Kit','₹849','')"><span class="cntry-flag">🇵🇹</span><div class="cntry-name">Portugal</div><div class="cntry-kits">Home · Away</div><div class="cntry-price-from">From ₹649</div></div>
+    <div class="cntry-card" onclick="openModal('🇳🇱','Netherlands NT','Netherlands Home Kit','₹749','')"><span class="cntry-flag">🇳🇱</span><div class="cntry-name">Netherlands</div><div class="cntry-kits">Home · Away</div><div class="cntry-price-from">From ₹549</div></div>
+    <div class="cntry-card" onclick="openModal('🇮🇹','Italy NT','Italy Home Kit','₹799','')"><span class="cntry-flag">🇮🇹</span><div class="cntry-name">Italy</div><div class="cntry-kits">Home · Away · Third</div><div class="cntry-price-from">From ₹599</div></div>
+    <div class="cntry-card" onclick="openModal('🇮🇳','India NT','India Home Kit','₹499','')"><span class="cntry-flag">🇮🇳</span><div class="cntry-name">India</div><div class="cntry-kits">Home · Away</div><div class="cntry-price-from">From ₹499</div></div>
+  </div>
+</section>
+
+<!-- WHY PLAYER VERSION -->
+<section class="pvt" id="why">
+  <div class="rev">
+    <div class="s-tag">The Difference</div>
+    <h2 class="s-title">WHY <em style="color:var(--gold);font-style:italic;">PLAYER</em><br><span class="stroke">VERSION?</span></h2>
+  </div>
+  <div class="pvt-grid rev">
+    <div class="pvt-visual">
+      <span class="pvt-big-jersey">👕</span>
+      <div class="pvt-label l1">Vaporknit Tech</div>
+      <div class="pvt-label l2">Laser-Cut Vents</div>
+      <div class="pvt-label l3">Slim Athletic Cut</div>
+    </div>
+    <div>
+      <p style="font-size:1rem;color:var(--gray);line-height:1.8;margin-bottom:2rem;">Player version jerseys are the same kits worn by professional players on the pitch — not the fan replica. The difference is in every thread.</p>
+      <div class="pvt-points">
+        <div class="pvt-point"><div class="pvt-num">01</div><div><div class="pvt-pt-title">Advanced Fabric Technology</div><div class="pvt-pt-desc">VaporKnit, Dri-FIT ADV, and Heat.RDY fabrics that wick moisture 2x faster than replica versions.</div></div></div>
+        <div class="pvt-point"><div class="pvt-num">02</div><div><div class="pvt-pt-title">Athletic Slim Fit</div><div class="pvt-pt-desc">Cut to hug the body for aerodynamic performance — just like the squad wears it on match day.</div></div></div>
+        <div class="pvt-point"><div class="pvt-num">03</div><div><div class="pvt-pt-title">Laser-Cut Ventilation</div><div class="pvt-pt-desc">Micro-perforated zones in high-heat areas keep you cool during intense play.</div></div></div>
+        <div class="pvt-point"><div class="pvt-num">04</div><div><div class="pvt-pt-title">Embroidered Details</div><div class="pvt-pt-desc">Woven badges, embroidered crests — not printed patches. Every detail is premium quality.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testis" id="testis">
+  <div class="rev" style="text-align:center;">
+    <div class="s-tag" style="justify-content:center;display:flex;">What Fans Say</div>
+    <h2 class="s-title">REAL <span class="stroke">REVIEWS</span></h2>
+  </div>
+  <div class="testis-grid rev">
+    <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-q">"The Real Madrid player version jersey is absolutely stunning. Fabric quality is unreal — you can tell it's the exact same as what Bellingham wears."</p><div class="tcard-auth"><div class="tcard-av">🧑</div><div><div class="tcard-name">Rahul Sharma</div><div class="tcard-club">Madrid fan · Delhi</div></div></div></div>
+    <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-q">"Ordered Brazil's WC kit for my kid. Arrived in 2 days, perfect fit, and the printing on the number 10 is crisp. Will order more for sure."</p><div class="tcard-auth"><div class="tcard-av">👩</div><div><div class="tcard-name">Sneha Patel</div><div class="tcard-club">Brazil fan · Ahmedabad</div></div></div></div>
+    <div class="tcard"><div class="tcard-stars">★★★★★</div><p class="tcard-q">"Best jersey store in India. I've ordered from 4 different clubs — all player version, all perfect quality. The slim fit actually looks great."</p><div class="tcard-auth"><div class="tcard-av">🧔</div><div><div class="tcard-name">Aditya Verma</div><div class="tcard-club">Arsenal &amp; Barca fan · Bangalore</div></div></div></div>
+  </div>
+</section>
+
+<!-- CUSTOMIZE CTA -->
+<div class="custom-banner">
+  <div>
+    <h2 class="cb-title">FIND YOUR <span>PERFECT</span><br>FIT &amp; KIT</h2>
+    <p class="cb-desc">120+ clubs and national teams. Home, away, and third kits. All in player version — the only version worth wearing.</p>
+    <div style="font-family:var(--f-sport);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:.7rem;">Available Sizes</div>
+    <div class="size-pills">
+      <span class="s-pill">XS</span>
+      <span class="s-pill">S</span>
+      <span class="s-pill sel">M</span>
+      <span class="s-pill">L</span>
+      <span class="s-pill">XL</span>
+      <span class="s-pill">XXL</span>
+      <span class="s-pill">3XL</span>
+    </div>
+    <a href="#jerseys" class="btn-gold">Browse All Jerseys</a>
+  </div>
+  <div class="cb-right">
+    <span class="cb-jersey-em">🏆</span>
+    <div class="cb-tag">120+ Clubs &amp; Nations · 2025/26 Season</div>
+  </div>
+</div>
+
+<!-- CART PAGE -->
+<section class="cart-page" id="cart-page" style="display:none; min-height:100vh; padding:8rem 5rem 5rem;">
+  <div class="cart-container">
+    <h1 class="s-title" style="margin-bottom:3rem;">YOUR <span class="stroke">CART</span></h1>
+    
+    <div id="cart-empty" style="text-align:center; padding:3rem; color:var(--gray);">
+      <div style="font-size:4rem; margin-bottom:1rem;">🛒</div>
+      <p style="font-size:1.2rem;">Your cart is empty</p>
+      <p style="margin-top:.5rem; margin-bottom:2rem;">Add some player version jerseys to get started!</p>
+      <a href="#" onclick="navigateTo('home')" class="btn-gold">Continue Shopping</a>
+    </div>
+
+    <div id="cart-content" style="display:none;">
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:4rem;">
+        <div>
+          <table style="width:100%; border-collapse:collapse;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--border);">
+                <th style="text-align:left; padding:1rem 0; font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold);">Jersey</th>
+                <th style="text-align:center; padding:1rem 0; font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold);">Size</th>
+                <th style="text-align:center; padding:1rem 0; font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold);">Qty</th>
+                <th style="text-align:right; padding:1rem 0; font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold);">Price</th>
+                <th style="text-align:right; padding:1rem 0;"></th>
+              </tr>
+            </thead>
+            <tbody id="cart-items"></tbody>
+          </table>
+        </div>
+
+        <div style="border:1px solid var(--border); padding:2rem; height:fit-content; position:sticky; top:100px;">
+          <h3 style="font-family:var(--f-sport); font-size:.9rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:1.5rem;">Order Summary</h3>
+          <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-size:.9rem;">
+            <span>Subtotal</span>
+            <span id="subtotal">₹0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-size:.9rem;">
+            <span>Delivery</span>
+            <span id="delivery-cost">₹0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:1.5rem; font-size:.9rem; color:var(--gold);">
+            <span style="color:var(--gray); font-size:.75rem;">(Free above ₹999)</span>
+          </div>
+          <div style="border-top:1px solid var(--border); padding-top:1rem; margin-bottom:2rem; display:flex; justify-content:space-between; font-size:1.1rem; font-weight:700; color:var(--gold);">
+            <span>Total</span>
+            <span id="total-price">₹0</span>
+          </div>
+          <button class="btn-gold" style="width:100%; padding:1rem;" onclick="navigateTo('checkout')">Proceed to Checkout</button>
+          <button class="btn-outline" style="width:100%; padding:1rem; margin-top:1rem;" onclick="navigateTo('home')">Continue Shopping</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKOUT PAGE -->
+<section class="checkout-page" id="checkout-page" style="display:none; min-height:100vh; padding:8rem 5rem 5rem;">
+  <div style="max-width:700px; margin:0 auto;">
+    <h1 class="s-title" style="margin-bottom:3rem;">CHECKOUT</h1>
+    
+    <form id="checkout-form" style="border:1px solid var(--border); padding:2.5rem;">
+      <h3 style="font-family:var(--f-sport); font-size:.9rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:1.5rem; color:var(--gold);">Delivery Details</h3>
+      
+      <div style="margin-bottom:1.5rem;">
+        <label style="display:block; font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:.5rem;">Full Name</label>
+        <input type="text" id="cust-name" required style="width:100%; padding:.8rem; background:var(--surface2); border:1px solid var(--border); color:var(--cream); font-family:var(--f-body);" placeholder="John Doe">
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem;">
+        <div>
+          <label style="display:block; font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:.5rem;">Email</label>
+          <input type="email" id="cust-email" required style="width:100%; padding:.8rem; background:var(--surface2); border:1px solid var(--border); color:var(--cream); font-family:var(--f-body);" placeholder="john@example.com">
+        </div>
+        <div>
+          <label style="display:block; font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:.5rem;">Phone</label>
+          <input type="tel" id="cust-phone" required style="width:100%; padding:.8rem; background:var(--surface2); border:1px solid var(--border); color:var(--cream); font-family:var(--f-body);" placeholder="9999999999">
+        </div>
+      </div>
+
+      <div style="margin-bottom:1.5rem;">
+        <label style="display:block; font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:.5rem;">Address</label>
+        <input type="text" id="cust-address" required style="width:100%; padding:.8rem; background:var(--surface2); border:1px solid var(--border); color:var(--cream); font-family:var(--f-body);" placeholder="123 Main St, Apt 4">
+      </div>
+
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:1rem; margin-bottom:2rem;">
+        <div>
+          <label style="display:block; font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:.5rem;">City</label>
+          <input type="text" id="cust-city" required style="width:100%; padding:.8rem; background:var(--surface2); border:1px solid var(--border); color:var(--cream); font-family:var(--f-body);" placeholder="Delhi">
+        </div>
+        <div>
+          <label style="display:block; font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:.5rem;">Pincode</label>
+          <input type="text" id="cust-pin" required style="width:100%; padding:.8rem; background:var(--surface2); border:1px solid var(--border); color:var(--cream); font-family:var(--f-body);" placeholder="110001">
+        </div>
+      </div>
+
+      <div style="border-top:1px solid var(--border); padding-top:1.5rem; margin-bottom:2rem;">
+        <h3 style="font-family:var(--f-sport); font-size:.9rem; letter-spacing:2px; text-transform:uppercase; margin-bottom:1rem; color:var(--gold);">Order Summary</h3>
+        <div style="display:flex; justify-content:space-between; margin-bottom:.8rem; font-size:.9rem;">
+          <span>Subtotal</span>
+          <span id="checkout-subtotal">₹0</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-size:.9rem;">
+          <span>Delivery</span>
+          <span id="checkout-delivery">₹0</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:1.1rem; font-weight:700; color:var(--gold);">
+          <span>Total</span>
+          <span id="checkout-total">₹0</span>
+        </div>
+      </div>
+
+      <button type="button" class="btn-gold" style="width:100%; padding:1rem; font-size:.9rem;" onclick="processPayment()">Pay with Razorpay</button>
+      <button type="button" class="btn-outline" style="width:100%; padding:1rem; margin-top:1rem;" onclick="navigateTo('cart')">Back to Cart</button>
+    </form>
+  </div>
+</section>
+
+<!-- ORDER CONFIRMATION PAGE -->
+<section class="order-page" id="order-page" style="display:none; min-height:100vh; padding:8rem 5rem 5rem; text-align:center;">
+  <div style="max-width:500px; margin:0 auto;">
+    <div style="font-size:5rem; margin-bottom:1.5rem;">✓</div>
+    <h1 class="s-title" style="margin-bottom:1rem; color:var(--grass);">Order Confirmed!</h1>
+    <p style="font-size:1rem; color:var(--gray); margin-bottom:2rem; line-height:1.8;">Thank you for your purchase. Your player version jerseys are on their way!</p>
+    
+    <div style="border:1px solid var(--border); padding:2rem; margin-bottom:2rem; text-align:left;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid var(--border);">
+        <span style="font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray);">Order ID</span>
+        <span style="font-family:var(--f-sport); font-size:.9rem; letter-spacing:1px; color:var(--gold);" id="order-id">#MK-000000</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid var(--border);">
+        <span style="font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray);">Customer</span>
+        <span id="order-customer">John Doe</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:1rem; padding-bottom:1rem; border-bottom:1px solid var(--border);">
+        <span style="font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray);">Total Amount</span>
+        <span style="font-size:1.2rem; color:var(--gold); font-weight:700;" id="order-amount">₹0</span>
+      </div>
+      <div style="display:flex; justify-content:space-between;">
+        <span style="font-family:var(--f-sport); font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gray);">Estimated Delivery</span>
+        <span id="order-delivery">2-3 Business Days</span>
+      </div>
+    </div>
+
+    <div style="background:var(--surface2); padding:1.5rem; margin-bottom:2rem; border-radius:4px;">
+      <p style="font-size:.9rem; color:var(--gray); margin-bottom:1rem;">A confirmation email has been sent to your registered email address with tracking details.</p>
+      <p style="font-size:.85rem; color:var(--gold);">Tracking ID: <span id="tracking-id" style="font-family:monospace;">—</span></p>
+    </div>
+
+    <a href="#" onclick="navigateTo('home')" class="btn-gold">Continue Shopping</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <a href="#" class="logo">
+        <span class="logo-main">Maestro<span> Kickwear</span></span>
+        <span class="logo-sub">Player Version Jerseys</span>
+      </a>
+      <p>India's premier destination for authentic player version football jerseys. Clubs, national teams, all leagues — starting at ₹350.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">Premier League</a></li>
+        <li><a href="#">La Liga</a></li>
+        <li><a href="#">Bundesliga</a></li>
+        <li><a href="#">Serie A</a></li>
+        <li><a href="#">International</a></li>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Sale</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Returns Policy</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Bulk Orders</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Authenticity</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div class="ft-copy">© 2025 Maestro Kickwear. Player Version Only.</div>
+    <div class="ft-social">
+      <a href="#" class="soc">IG</a>
+      <a href="#" class="soc">YT</a>
+      <a href="#" class="soc">TW</a>
+      <a href="#" class="soc">WA</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== CART MANAGEMENT =====
+const STORAGE_KEY = 'maestro_cart';
+
+function getCart() {
+  const cart = localStorage.getItem(STORAGE_KEY);
+  return cart ? JSON.parse(cart) : { items: [] };
+}
+
+function saveCart(cart) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+  updateCartBadge();
+  renderCart();
+}
+
+function addToCartItem(emoji, club, name, price, size) {
+  const cart = getCart();
+  const itemId = `${name}-${size}`;
+  const existingItem = cart.items.find(i => i.id === itemId);
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.items.push({
+      id: itemId,
+      emoji,
+      club,
+      name,
+      price: parseInt(price.replace(/[^\d]/g, '')),
+      size,
+      quantity: 1
+    });
+  }
+
+  saveCart(cart);
+  showAddedNotification();
+  closeModal();
+}
+
+function updateCartItemQuantity(itemId, newQty) {
+  const cart = getCart();
+  const item = cart.items.find(i => i.id === itemId);
+  if (item) {
+    if (newQty <= 0) {
+      cart.items = cart.items.filter(i => i.id !== itemId);
+    } else {
+      item.quantity = newQty;
+    }
+    saveCart(cart);
+  }
+}
+
+function removeFromCart(itemId) {
+  const cart = getCart();
+  cart.items = cart.items.filter(i => i.id !== itemId);
+  saveCart(cart);
+}
+
+function updateCartBadge() {
+  const cart = getCart();
+  const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+  document.getElementById('cartbtn').textContent = `🛒 Cart (${totalItems})`;
+}
+
+function calculateTotals() {
+  const cart = getCart();
+  const subtotal = cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const deliveryFree = subtotal >= 999;
+  const delivery = deliveryFree ? 0 : 50;
+  const total = subtotal + delivery;
+
+  return { subtotal, delivery, total };
+}
+
+function renderCart() {
+  const cart = getCart();
+  const cartContent = document.getElementById('cart-content');
+  const cartEmpty = document.getElementById('cart-empty');
+  const cartItems = document.getElementById('cart-items');
+
+  if (cart.items.length === 0) {
+    cartEmpty.style.display = 'block';
+    cartContent.style.display = 'none';
+    return;
+  }
+
+  cartEmpty.style.display = 'none';
+  cartContent.style.display = 'block';
+
+  cartItems.innerHTML = cart.items.map(item => `
+    <tr style="border-bottom:1px solid var(--border);">
+      <td style="padding:1.5rem 0; font-size:.9rem;">
+        <div style="display:flex; gap:1rem; align-items:center;">
+          <span style="font-size:2rem;">${item.emoji}</span>
+          <div>
+            <div style="font-family:var(--f-sport); font-size:.75rem; letter-spacing:1px; text-transform:uppercase; color:var(--gold);">${item.club}</div>
+            <div style="font-size:.9rem;">${item.name}</div>
+          </div>
+        </div>
+      </td>
+      <td style="padding:1.5rem 0; text-align:center; font-size:.9rem;">${item.size}</td>
+      <td style="padding:1.5rem 0; text-align:center;">
+        <input type="number" min="1" max="10" value="${item.quantity}" onchange="updateCartItemQuantity('${item.id}', parseInt(this.value))" 
+          style="width:50px; padding:.3rem; background:var(--surface2); border:1px solid var(--border); color:var(--cream); text-align:center; font-family:var(--f-body);">
+      </td>
+      <td style="padding:1.5rem 0; text-align:right; font-size:.9rem; color:var(--gold); font-weight:700;">₹${(item.price * item.quantity).toLocaleString('en-IN')}</td>
+      <td style="padding:1.5rem 0; text-align:right;">
+        <button onclick="removeFromCart('${item.id}')" style="background:none; border:none; color:var(--gold); cursor:pointer; font-size:.9rem;" title="Remove">✕</button>
+      </td>
+    </tr>
+  `).join('');
+
+  const { subtotal, delivery, total } = calculateTotals();
+  document.getElementById('subtotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+  document.getElementById('delivery-cost').textContent = subtotal >= 999 ? 'FREE' : `₹${delivery}`;
+  document.getElementById('total-price').textContent = `₹${total.toLocaleString('en-IN')}`;
+}
+
+function showAddedNotification() {
+  const btn = event.target;
+  const original = btn.textContent;
+  btn.textContent = '✓ Added to Cart';
+  btn.style.background = 'var(--grass)';
+  btn.style.borderColor = 'var(--grass)';
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.style.background = '';
+    btn.style.borderColor = '';
+  }, 1500);
+}
+
+// ===== PAGE NAVIGATION =====
+function navigateTo(page) {
+  // Hide hero
+  const hero = document.getElementById('hero');
+  if (hero) hero.style.display = 'none';
+  
+  // Hide all sections that are not cart/checkout/order pages
+  const cartPage = document.getElementById('cart-page');
+  const checkoutPage = document.getElementById('checkout-page');
+  const orderPage = document.getElementById('order-page');
+  
+  if (cartPage) cartPage.style.display = 'none';
+  if (checkoutPage) checkoutPage.style.display = 'none';
+  if (orderPage) orderPage.style.display = 'none';
+  
+  document.querySelectorAll('section').forEach(s => {
+    if (s.id !== 'cart-page' && s.id !== 'checkout-page' && s.id !== 'order-page') {
+      s.style.display = 'none';
+    }
+  });
+
+  if (page === 'home') {
+    if (hero) hero.style.display = '';
+    document.querySelectorAll('section').forEach(s => {
+      if (s.id !== 'cart-page' && s.id !== 'checkout-page' && s.id !== 'order-page') {
+        s.style.display = '';
+      }
+    });
+    window.scrollTo(0, 0);
+  } else if (page === 'cart') {
+    if (cartPage) cartPage.style.display = 'block';
+    renderCart();
+    window.scrollTo(0, 0);
+  } else if (page === 'checkout') {
+    const cart = getCart();
+    if (cart.items.length === 0) {
+      alert('Your cart is empty!');
+      navigateTo('cart');
+      return;
+    }
+    if (checkoutPage) checkoutPage.style.display = 'block';
+    updateCheckoutSummary();
+    window.scrollTo(0, 0);
+  } else if (page === 'order') {
+    if (orderPage) orderPage.style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+}
+
+function updateCheckoutSummary() {
+  const { subtotal, delivery, total } = calculateTotals();
+  document.getElementById('checkout-subtotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+  document.getElementById('checkout-delivery').textContent = subtotal >= 999 ? 'FREE' : `₹${delivery}`;
+  document.getElementById('checkout-total').textContent = `₹${total.toLocaleString('en-IN')}`;
+}
+
+// ===== RAZORPAY PAYMENT =====
+function processPayment() {
+  const name = document.getElementById('cust-name').value;
+  const email = document.getElementById('cust-email').value;
+  const phone = document.getElementById('cust-phone').value;
+  const address = document.getElementById('cust-address').value;
+  const city = document.getElementById('cust-city').value;
+  const pin = document.getElementById('cust-pin').value;
+
+  if (!name || !email || !phone || !address || !city || !pin) {
+    alert('Please fill in all delivery details');
+    return;
+  }
+
+  const { total } = calculateTotals();
+
+  // Check if Razorpay is available (for production with HTTPS)
+  if (typeof Razorpay !== 'undefined') {
+    const options = {
+      key: 'rzp_test_1sSfrJx41hcojT',
+      amount: total * 100,
+      currency: 'INR',
+      name: 'Maestro Kickwear',
+      description: 'Player Version Jersey Purchase',
+      prefill: {
+        name: name,
+        email: email,
+        contact: phone
+      },
+      handler: function(response) {
+        completeOrder(response.razorpay_payment_id, name, email, phone, address, city, pin, total);
+      },
+      modal: {
+        ondismiss: function() {
+          alert('Payment cancelled. Please try again.');
+        }
+      },
+      theme: {
+        color: '#c9a84c'
+      }
+    };
+
+    const razorpay = new Razorpay(options);
+    razorpay.open();
+  } else {
+    // Fallback for local testing (when Razorpay SDK not available)
+    const proceed = confirm(`Ready to complete payment of ₹${total} for:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nClick OK to confirm (using test mode)`);
+    if (proceed) {
+      // Simulate successful payment with a random test transaction ID
+      const testPaymentId = 'test_pay_' + Math.random().toString(36).substr(2, 12).toUpperCase();
+      completeOrder(testPaymentId, name, email, phone, address, city, pin, total);
+    }
+  }
+}
+
+function completeOrder(paymentId, name, email, phone, address, city, pin, total) {
+  const orderId = 'MK-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+  const trackingId = 'TRK-' + Math.random().toString(36).substr(2, 12).toUpperCase();
+
+  // Store order in localStorage
+  const orders = JSON.parse(localStorage.getItem('maestro_orders') || '[]');
+  orders.push({
+    orderId,
+    trackingId,
+    paymentId,
+    name,
+    email,
+    phone,
+    address,
+    city,
+    pin,
+    total,
+    date: new Date().toISOString(),
+    items: getCart().items
+  });
+  localStorage.setItem('maestro_orders', JSON.stringify(orders));
+
+  // Clear cart
+  localStorage.removeItem(STORAGE_KEY);
+  updateCartBadge();
+
+  // Show confirmation
+  document.getElementById('order-id').textContent = `#${orderId}`;
+  document.getElementById('order-customer').textContent = name;
+  document.getElementById('order-amount').textContent = `₹${total.toLocaleString('en-IN')}`;
+  document.getElementById('tracking-id').textContent = trackingId;
+
+  navigateTo('order');
+}
+
+// ===== MODAL ENHANCEMENTS =====
+function openModal(emoji, club, name, price, oldPrice) {
+  document.getElementById('m-emoji').textContent = emoji;
+  document.getElementById('m-club').textContent = club;
+  document.getElementById('m-name').textContent = name;
+  document.getElementById('m-price').textContent = price;
+  
+  // Reset size selection
+  document.querySelectorAll('.ms').forEach(x => x.classList.remove('sel'));
+  document.querySelector('.ms').classList.add('sel');
+  
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+function selSize(el) {
+  document.querySelectorAll('.ms').forEach(x => x.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function addToCart() {
+  const emoji = document.getElementById('m-emoji').textContent;
+  const club = document.getElementById('m-club').textContent;
+  const name = document.getElementById('m-name').textContent;
+  const price = document.getElementById('m-price').textContent;
+  const size = document.querySelector('.ms.sel').textContent;
+
+  addToCartItem(emoji, club, name, price, size);
+}
+
+// ===== EXISTING CODE ===== 
+// Cursor
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.j-card,.cat-card,.club-tile,.cntry-card').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('expand'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('expand'));
+});
+
+// Filter tabs
+document.querySelectorAll('.cat-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.cat-tab').forEach(x => x.classList.remove('on'));
+    t.classList.add('on');
+  });
+});
+document.querySelectorAll('.f-btn').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.f-btn').forEach(x => x.classList.remove('on'));
+    t.classList.add('on');
+  });
+});
+
+// Size pills
+document.querySelectorAll('.s-pill').forEach(p => {
+  p.addEventListener('click', () => {
+    document.querySelectorAll('.s-pill').forEach(x => x.classList.remove('sel'));
+    p.classList.add('sel');
+  });
+});
+
+// Modal dismiss
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// J-add buttons (prevent modal trigger + add to cart)
+document.querySelectorAll('.j-add').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    
+    // Find parent card and extract data
+    const card = btn.closest('.j-card');
+    const emoji = card.querySelector('span[style*="font-size"]')?.textContent || '👕';
+    const club = card.querySelector('.j-club').textContent;
+    const name = card.querySelector('.j-name').textContent;
+    const price = card.querySelector('.j-price').textContent;
+    
+    // Default to M size for quick add
+    addToCartItem(emoji, club, name, price, 'M');
+
+    btn.textContent = '✓ Added';
+    btn.style.background = 'var(--gold)';
+    btn.style.color = 'var(--ink)';
+    btn.style.borderColor = 'var(--gold)';
+    setTimeout(() => {
+      btn.textContent = 'Add +';
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }, 1500);
+  });
+});
+
+// Scroll reveal
+const revEls = document.querySelectorAll('.rev');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1 });
+revEls.forEach(el => obs.observe(el));
+
+// Initialize cart on page load
+updateCartBadge();
+</script>
+</body>
+</html>
